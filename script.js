@@ -79,3 +79,5 @@ chatForm.addEventListener("submit", async (e) => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
   }
 });
+
+const WORKER_URL = "https://project8-l.chenlingzheng.workers.dev/"; // 替换为你的实际 Worker 地址
