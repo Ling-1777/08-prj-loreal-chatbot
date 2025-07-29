@@ -40,17 +40,11 @@ chatForm.addEventListener("submit", async (e) => {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   try {
-    // 调用 OpenAI API，带上完整消息历史以追踪上下文
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    // 通过 Cloudflare Worker 发送请求，不再直接用 OpenAI API Key
+    const response = await fetch(WORKER_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o",
-        messages: messages,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages }),
     });
 
     const data = await response.json();
